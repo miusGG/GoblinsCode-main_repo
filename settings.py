@@ -2,6 +2,7 @@ import pygame as pg
 from draw_menu import ImageButton
 
 
+#Все настройки игры
 set = {
     "FPS" : 0,
     "INGAME" : False,
@@ -70,7 +71,8 @@ set = {
         }, "items": {
 
         }, "entity": {
-            "frog" : "frog.jpg"
+            "bleb": "bleb.png",
+            "frog": "frog.jpg"
         }, "secondLayer": {
             "frog" : "frog.jpg"
         }
@@ -79,6 +81,7 @@ set = {
 
 WIDTH, HEIGHT = set["DISPLAY"]
 
+#Кноки под каждое меню
 buttons = {
     "start" : ImageButton(WIDTH - HEIGHT, HEIGHT / 2.5, WIDTH/6, HEIGHT/9, "НАЧАТЬ ИГРУ", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3"),
     "exit" : ImageButton(WIDTH - HEIGHT, HEIGHT / 1.47, WIDTH/6, HEIGHT/9, "ВЫЙТИ", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3"),
@@ -104,8 +107,8 @@ ingamebuttons = {
     "exit_from_game" : ImageButton(WIDTH/2-(252/2), 450, 302, 124, "ВЫЙТИ", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3")
 }
 
+# Функция для загрузки всех текстур
 def load():
-    set["textures"]["none"] = pg.image.load("game/textures/structures/" + set["none_texture"]).convert()
     set["player"]["texture"] = pg.image.load("game/textures/entity/" + set["player_texture"])
     for i in set["animations"]:
         set["textures"]["animations"][i] = []

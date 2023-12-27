@@ -1,4 +1,4 @@
-class mob():
+class Mob():
     def __init__(self, texture, cor, health, weapon, ai=None):
         self.health = health
         self.texture = texture
@@ -13,13 +13,17 @@ class mob():
         ]
         self.ai = ai
 
+    #Добавление ИИ
     def addAI(self, ai):
         self.ai = ai
 
+    #Обновление ИИ
     def updateAI(self, ingame, onpause):
         if self.ai != None and ingame and not onpause:
             self.ai()
 
+#Все мобы
 mobs = []
+
 
 import createmobs

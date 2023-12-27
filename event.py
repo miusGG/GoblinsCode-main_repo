@@ -7,15 +7,18 @@ from settings import buttons, buttonsSettings, ingamebuttons, buttonVideoSetting
 from generate import gen, clearWorld
 from mob import mobs
 
+# Обновление ИИ мобов
 def mobsAI():
     for i in mobs:
         i.updateAI(s["INGAME"], s["ONPAUSE"])
 
+#Функция ИВЕНТОВ
 def event(fps):
     for run in pg.event.get():
         if run.type == pg.QUIT:
             sys.exit()
 
+        #Кнопки для МЕНЮ
         if s["INMENU"]:
             for j in buttons:
                 buttons[j].handle_event(run, s["INGAME"])
@@ -33,6 +36,7 @@ def event(fps):
                 if run.type == pg.USEREVENT and run.button == buttons["exit"]:
                     pg.quit()
 
+        #Кнопки для настроек
         if s["INSETTINGS"]:
             for j in buttonsSettings:
                 buttonsSettings[j].handle_event(run, s["INGAME"])
@@ -46,6 +50,7 @@ def event(fps):
                     s["INSETTINGS"] = False
                     s["INVIDEOSETTINGS"] = True
 
+        # Кнопки для настроек видео
         if s["INVIDEOSETTINGS"]:
             for j in buttonVideoSettings:
                 buttonVideoSettings[j].handle_event(run, s["INGAME"])
@@ -64,6 +69,7 @@ def event(fps):
                     s["INSETTINGS"] = True
                     s["INVIDEOSETTING"] = False
 
+        # Кнопки для паузы
         if s["ONPAUSE"] and s["INGAME"]:
             for j in ingamebuttons:
                 ingamebuttons[j].handle_event(run, s["INGAME"])
@@ -78,6 +84,7 @@ def event(fps):
         if run.type == pg.USEREVENT and run.button == buttons["exit"]:
             pg.quit()
 
+        # Если крутиться колёсико мышки то клетки УВЕЛИЧИВАЮТСЯ или УМЕНЬШАЮТСЯ в ширину или в длинну
         if run.type == pg.MOUSEWHEEL:
             if (s["ceilSize"] + run.y * 2 > 0) and (not s["ONPAUSE"]):
                 s["ceilSize"] += run.y * 2
@@ -85,7 +92,7 @@ def event(fps):
             s["cx"] = run.pos[0]
             s["cy"] = run.pos[1]
 
-        #Кнопка ESC(пауза)
+        # Если кнопка НАЖАТА то игрок может ходить
         if run.type == pg.KEYDOWN:
             if run.key == pg.K_ESCAPE:
                 if s["INGAME"]:
@@ -96,16 +103,9 @@ def event(fps):
             if run.key == pg.K_TAB:
                 s["MINIMAP"][1] = 1000
 
+            # При нажатии F1 показываются КОЛЛИЗИИИ
             if run.key == pg.K_F1:
-                if s["showCollisions"]:
-                    s["showCollisions"] = False
-                else:
-                    s["showCollisions"] = True
-            if run.key == pg.K_F2:
-                if s["showCurCoords"]:
-                    s["showCurCoords"] = False
-                else:
-                    s["showCurCoords"] = True
+                s["showCollisions"] = not s["showCollisions"]
 
             if run.key == pg.K_w:
                 s["player"]["speedy"] -= s["player"]["speed"]
@@ -115,6 +115,8 @@ def event(fps):
                 s["player"]["speedy"] += s["player"]["speed"]
             if run.key == pg.K_d:
                 s["player"]["speedx"] += s["player"]["speed"]
+
+        # Если кнопка ОТЖАТА то игрок теряет скорость
         if run.type == pg.KEYUP:
             if run.key == pg.K_TAB:
                 s["MINIMAP"][1] = 300
@@ -128,6 +130,7 @@ def event(fps):
                 s["player"]["speedx"] -= s["player"]["speed"]
 
 
+    # проверка есть ли туда куда хочет пойти игрок припятствие
     if not s["ONPAUSE"]:
         if ((s["player"]["speedx"] != 0) or (s["player"]["speedy"] != 0)) and (fps != 0):
             if (checkCollisionx(s["player"]["posx"] + s["player"]["speedx"] / fps)):
