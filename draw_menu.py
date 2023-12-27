@@ -3,7 +3,7 @@ import pygame
 
 pygame.mixer.init()
 
-#Класс создания кнопки
+#Класс создания кнопки.
 class ImageButton:
     def __init__(self, x, y, width, height, text, image_path, hover_image_path=None, sound_path=None):
         self.x = x

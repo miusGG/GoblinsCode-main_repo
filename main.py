@@ -6,7 +6,7 @@ from draw import draw
 
 pg.init()
 
-#Устанавливаем параметры экрана и название окна
+#Устанавливаем параметры экрана и название окна.
 sc = pg.display.set_mode((s["DISPLAY"][0], s["DISPLAY"][1]))
 pg.display.set_caption(s["WINNAME"])
 

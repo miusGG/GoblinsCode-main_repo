@@ -7,7 +7,7 @@ from settings import buttons, buttonsSettings, ingamebuttons, buttonVideoSetting
 from generate import gen, clearWorld
 from mob import mobs
 
-# Обновление ИИ мобов
+# Обновление ИИ мобов.
 def mobsAI():
     for i in mobs:
         i.updateAI(s["INGAME"], s["ONPAUSE"])

@@ -5,7 +5,7 @@ from mob import Mob
 from mob import mobs
 
 
-#Создания ИИ мобов
+#Создания ИИ мобов.
 def frog(mob):
     if mob.pos[0] < s['player']['posx']:
         mob.pos[0] += 1 / s["FPS"].get_fps()

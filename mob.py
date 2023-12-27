@@ -13,7 +13,7 @@ class Mob():
         ]
         self.ai = ai
 
-    #Добавление ИИ
+    #Добавление ИИ.
     def addAI(self, ai):
         self.ai = ai
 

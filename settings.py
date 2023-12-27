@@ -2,7 +2,7 @@ import pygame as pg
 from draw_menu import ImageButton
 
 
-#Все настройки игры
+#Все настройки игры.
 set = {
     "FPS" : 0,
     "INGAME" : False,

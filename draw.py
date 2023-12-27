@@ -11,7 +11,7 @@ pg.font.init()
 font = pg.font.SysFont('arial', 30)
 font2 = pg.font.SysFont('arial', 45)
 
-#Функция отрисовки всех функций
+#Функция отрисовки всех функций.
 def draw(sc, fps):
     if s["INGAME"]:
         draw_game(sc, fps)

@@ -3,7 +3,7 @@ from settings import set as s
 
 blocks = ["dirt", "dirtwithwall", "dirtwithcorner", "dirtwithcorner2"]
 
-#Определяет сгенерирована ли последняя комната
+#Определяет сгенерирована ли последняя комната.
 lastRoom = False
 #Размеры комнаты
 roomsize = s["roomSize"] * 2 + 6

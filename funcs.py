@@ -8,7 +8,7 @@ from settings import set as s
 debug_prefix = "[MF]"
 count = 0
 
-#Отрисовка 3 слоев игры
+#Отрисовка 3 слоев игры.
 def drawImgs(x, y, keyx, keyy, sc):
     #Сама карта
     if (keyx in world) and (keyy in world[keyx]):
