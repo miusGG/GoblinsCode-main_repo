@@ -113,6 +113,8 @@ def event(fps):
         if run.type == BLEBDAMAGEEVENT and s["entity_damage_triggers"]["bleb_options"]["bleb-trigger"]:
             s["player"]["health"] = s["player"]["health"] - s["entity_damage_triggers"]["bleb_options"]["bled-damage"]
             s["deth"] = True
+            s["INGAME"] = False
+            s["INMENU"] = False
 
         # Если кнопка НАЖАТА то игрок может ходить
         if run.type == pg.KEYDOWN:
