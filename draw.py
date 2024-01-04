@@ -16,17 +16,41 @@ def draw(sc, fps):
     if s["INGAME"]:
         draw_game(sc, fps)
     elif s["INMENU"]:
+        s["player"]["posy"] = 0
+        s["player"]["posx"] = 0
         draw_menu(sc)
     elif s["INSETTINGS"]:
         draw_settings(sc)
     elif s["INVIDEOSETTINGS"]:
         draw_video_settings(sc)
+    elif s["deth"]:
+        draw_deth(sc)
 
 
 #Функция отрисовки паузы
 def draw_onpause(sc):
     ingamebuttons["exit_from_game"].check_hover(pg.mouse.get_pos())
     ingamebuttons["exit_from_game"].draw(sc)
+
+
+#Прорисовка смерти
+def draw_deth(sc):
+    s["INGAME"] = False
+    s["ONPAUSE"] = False
+    s["INMENU"] = True
+    sc.fill((0, 0, 0))
+
+    WIDTH, HEIGHT = s["DISPLAY"]
+
+    text = font.render('YOU ARE DIE!', True, (255, 255, 255))
+
+    text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+    sc.blit(text, text_rect)
+
+    ingamebuttons["exit_from_game"].check_hover(pg.mouse.get_pos())
+    ingamebuttons["exit_from_game"].draw(sc)
+
+    pg.display.flip()
 
 
 #Функиця открисовки настроек

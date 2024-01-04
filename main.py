@@ -10,6 +10,10 @@ pg.init()
 sc = pg.display.set_mode((s["DISPLAY"][0], s["DISPLAY"][1]))
 pg.display.set_caption(s["WINNAME"])
 
+#Тип инвента для получения урона
+DAMAGEEVENT, timer = pg.USEREVENT+1, 3000
+pg.time.set_timer(DAMAGEEVENT, timer)
+
 clock = pg.time.Clock()
 s["FPS"] = clock
 

@@ -22,6 +22,7 @@ set = {
     "showCurCoords" : False,
     "cx" : 0,
     "cy" : 0,
+    "deth" : False,
     "player" : {
         "rotate" : False,
         "health": 100,
@@ -37,6 +38,11 @@ set = {
         "player":[
             "entity/playerwalk1.png",
             "entity/playerwalk2.png"
+        ],
+        "bleb":[
+            "entity/slime.png",
+            "entity/slime2.png",
+            "entity/slime3.png"
         ]
     },
     "textures": {
@@ -72,10 +78,18 @@ set = {
 
         }, "entity": {
             "bleb": "bleb.png",
-            "frog": "frog.jpg"
+            "frog": "frog.jpg",
+            "slime": "slime.png"
         }, "secondLayer": {
             "frog" : "frog.jpg"
         }
+
+    }, "entity_damage_triggers": {
+            "bleb_options": {
+                "bleb-trigger": False,
+                "bled-damage": 100,
+                "bleb-kd": 14000
+            }
     }
 }
 

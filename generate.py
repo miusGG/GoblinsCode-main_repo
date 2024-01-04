@@ -257,12 +257,12 @@ class Generate():
             for i in range(10):
                 x = randint(-s["roomSize"], s["roomSize"] - 1)
                 y = randint(-s["roomSize"], s["roomSize"] - 1)
-                self.addBlockToSecondLayer((x + c[0] * roomsize, y + c[1] * roomsize), "frog", 0)
+                #self.addBlockToSecondLayer((x + c[0] * roomsize, y + c[1] * roomsize), "frog", 0)
         if type == 0:
             for i in range(2):
                 x = randint(-s["roomSize"], s["roomSize"] - 1)
                 y = randint(-s["roomSize"], s["roomSize"] - 1)
-                self.addBlockToSecondLayer((x + c[0] * roomsize, y + c[1] * roomsize), "frog", 0)
+                #self.addBlockToSecondLayer((x + c[0] * roomsize, y + c[1] * roomsize), "frog", 0)
 
     def generateFug(self):
         pass

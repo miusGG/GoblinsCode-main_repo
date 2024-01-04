@@ -7,10 +7,16 @@ from settings import buttons, buttonsSettings, ingamebuttons, buttonVideoSetting
 from generate import gen, clearWorld
 from mob import mobs
 
+
 # Обновление ИИ мобов.
 def mobsAI():
     for i in mobs:
         i.updateAI(s["INGAME"], s["ONPAUSE"])
+
+
+#Тип инвентов для получения урона
+BLEBDAMAGEEVENT, timer = pg.USEREVENT+1, s["entity_damage_triggers"]["bleb_options"]["bleb-kd"]
+
 
 #Функция ИВЕНТОВ
 def event(fps):
@@ -81,6 +87,17 @@ def event(fps):
                     s["ONPAUSE"] = False
                     s["INMENU"] = True
 
+        if s["deth"]:
+            for j in ingamebuttons:
+                ingamebuttons[j].handle_event(run, s["INGAME"])
+                ingamebuttons[j].check_hover(pg.mouse.get_pos())
+
+                if run.type == pg.USEREVENT and run.button == ingamebuttons["exit_from_game"]:
+                    clearWorld()
+                    s["INGAME"] = False
+                    s["ONPAUSE"] = False
+                    s["INMENU"] = True
+
         if run.type == pg.USEREVENT and run.button == buttons["exit"]:
             pg.quit()
 
@@ -91,6 +108,11 @@ def event(fps):
         if run.type == pg.MOUSEMOTION:
             s["cx"] = run.pos[0]
             s["cy"] = run.pos[1]
+
+        #События для получения урона от мобов
+        if run.type == BLEBDAMAGEEVENT and s["entity_damage_triggers"]["bleb_options"]["bleb-trigger"]:
+            s["player"]["health"] = s["player"]["health"] - s["entity_damage_triggers"]["bleb_options"]["bled-damage"]
+            s["deth"] = True
 
         # Если кнопка НАЖАТА то игрок может ходить
         if run.type == pg.KEYDOWN:
