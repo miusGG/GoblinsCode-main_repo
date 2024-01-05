@@ -87,13 +87,25 @@ def event(fps):
                     s["ONPAUSE"] = False
                     s["INMENU"] = True
 
+        #Если СМЭЭЭРТъ!
         if s["deth"]:
             for j in ingamebuttons:
                 ingamebuttons[j].handle_event(run, s["INGAME"])
                 ingamebuttons[j].check_hover(pg.mouse.get_pos())
 
+                #Тут мы убираем все тригеры дамага
+                s["entity_damage_triggers"]["bleb_options"]["bleb-trigger"] = False
+
+                s["player"]["health"] = 100
+
+                clearWorld()
+
+                s["INGAME"] = False
+                s["ONPAUSE"] = False
+                s["INMENU"] = False
+
                 if run.type == pg.USEREVENT and run.button == ingamebuttons["exit_from_game"]:
-                    clearWorld()
+                    s["deth"] = False
                     s["INGAME"] = False
                     s["ONPAUSE"] = False
                     s["INMENU"] = True

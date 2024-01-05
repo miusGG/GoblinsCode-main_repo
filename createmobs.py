@@ -10,9 +10,6 @@ from funcs import check_collision
 from settings import set as s
 
 
-def damage(dam, time):
-    s["player"]["health"] = s["player"]["health"] - dam
-
 #Создания ИИ мобов.
 def frog(mob):
     mob_pos_x = mob.pos[0]
@@ -36,19 +33,18 @@ def frog(mob):
         mob.pos[1] -= 1 / s["FPS"].get_fps()
 
 
-def slime(mob):
-    speed = 100 / s["FPS"].get_fps()
-    dx = s['player']['posx'] - mob.pos[0]
-    dy = s['player']['posy'] - mob.pos[1]
-    distance = math.hypot(dx, dy)
-    vel_x = dx / distance * speed
-    vel_y = dy / distance * speed
-    while distance > speed:
-        mob.pos[0] += vel_x
-        mob.pos[1] += vel_y
-        distance = math.hypot(s['player']['posx'] - mob.pos[0], s['player']['posy'] - mob.pos[1])
+#Прототип нового моба
+def glider(mob):
+
+    if mob.pos[0] < s['player']['posx']:
+        mob.pos[0] += 1 / s["FPS"].get_fps()
+    else:
+        mob.pos[0] -= 1 / s["FPS"].get_fps()
+    if mob.pos[1] < s['player']['posy']:
+        mob.pos[1] += 1 / s["FPS"].get_fps()
+    else:
+        mob.pos[1] -= 1 / s["FPS"].get_fps()
 
 
 # Добавление мобов
-#mobs.append(Mob("bleb", (10, 10), 10, None, lambda: slime(mobs[len(mobs) - 1])))
 mobs.append(Mob("slime", (10, 10), 10, None, lambda: frog(mobs[len(mobs) - 1])))

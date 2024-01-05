@@ -35,17 +35,14 @@ def draw_onpause(sc):
 
 #Прорисовка смерти
 def draw_deth(sc):
-    s["INGAME"] = False
-    s["ONPAUSE"] = False
-    s["INMENU"] = True
-    sc.fill((0, 0, 0))
-
-    WIDTH, HEIGHT = s["DISPLAY"]
+    WIDTH, HEIGHT = 1920, 1080
 
     text = font.render('YOU ARE DIE!', True, (255, 255, 255))
 
     text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
     sc.blit(text, text_rect)
+
+    sc.fill((0, 0, 0))
 
     ingamebuttons["exit_from_game"].check_hover(pg.mouse.get_pos())
     ingamebuttons["exit_from_game"].draw(sc)
