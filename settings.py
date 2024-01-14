@@ -10,6 +10,7 @@ set = {
     "INSETTINGS" : False,
     "INVIDEOSETTINGS" : False,
     "ONPAUSE" : False,
+    "lastRoom": False,
     "OPENEDMAP" : False,
     "DISPLAY" : [1920, 1080],
     "MINIMAP" : [50, 300, 100],
@@ -119,6 +120,10 @@ buttonVideoSettings = {
 
 ingamebuttons = {
     "exit_from_game" : ImageButton(WIDTH/2-(252/2), 450, 302, 124, "ВЫЙТИ", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3")
+}
+
+LastMenubButtons = {
+    "exit_to_menu": ImageButton(WIDTH/2-(252/2), 450, 302, 124, "ВЫЙТИ", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3")
 }
 
 # Функция для загрузки всех текстур

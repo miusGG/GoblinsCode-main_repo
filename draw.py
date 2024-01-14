@@ -2,7 +2,7 @@ import pygame as pg
 import time
 
 from settings import set as s
-from settings import buttons, buttonsSettings, ingamebuttons, buttonVideoSettings
+from settings import buttons, buttonsSettings, ingamebuttons, buttonVideoSettings, LastMenubButtons
 from generate import world, collisions, world_map
 from funcs import playAnimation, drawImgs
 from mob import mobs
@@ -24,13 +24,24 @@ def draw(sc, fps):
     elif s["INVIDEOSETTINGS"]:
         draw_video_settings(sc)
     elif s["deth"]:
+        s["player"]["posy"] = 0
+        s["player"]["posx"] = 0
         draw_deth(sc)
+    elif s["lastRoom"]:
+        s["player"]["posy"] = 0
+        s["player"]["posx"] = 0
+        draw_lastmenu(sc)
 
 
 #Функция отрисовки паузы
 def draw_onpause(sc):
     ingamebuttons["exit_from_game"].check_hover(pg.mouse.get_pos())
     ingamebuttons["exit_from_game"].draw(sc)
+
+def draw_lastmenu(sc):
+    sc.fill((41, 39, 41))
+    LastMenubButtons["exit_to_menu"].check_hover(pg.mouse.get_pos())
+    LastMenubButtons["exit_to_menu"].draw(sc)
 
 
 #Прорисовка смерти
@@ -42,7 +53,7 @@ def draw_deth(sc):
     text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
     sc.blit(text, text_rect)
 
-    sc.fill((0, 0, 0))
+    sc.fill((41, 39, 41))
 
     ingamebuttons["exit_from_game"].check_hover(pg.mouse.get_pos())
     ingamebuttons["exit_from_game"].draw(sc)

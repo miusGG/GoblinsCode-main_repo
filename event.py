@@ -3,7 +3,7 @@ import pygame as pg
 
 from settings import set as s
 from funcs import checkCollisionx, checkCollisiony
-from settings import buttons, buttonsSettings, ingamebuttons, buttonVideoSettings
+from settings import buttons, buttonsSettings, ingamebuttons, buttonVideoSettings, LastMenubButtons
 from generate import gen, clearWorld
 from mob import mobs
 
@@ -86,6 +86,23 @@ def event(fps):
                     s["INGAME"] = False
                     s["ONPAUSE"] = False
                     s["INMENU"] = True
+
+        if s["lastRoom"]:
+            s["INGAME"] = False
+            s["ONPAUSE"] = False
+            s["INMENU"] = False
+            s["deth"] = False
+
+            for j in LastMenubButtons:
+                LastMenubButtons[j].handle_event(run, s["INGAME"])
+                LastMenubButtons[j].check_hover(pg.mouse.get_pos())
+
+                if run.type == pg.USEREVENT and run.button == LastMenubButtons["exit_to_menu"]:
+                    clearWorld()
+                    s["INGAME"] = False
+                    s["ONPAUSE"] = False
+                    s["INMENU"] = True
+
 
         #Если СМЭЭЭРТъ!
         if s["deth"]:
