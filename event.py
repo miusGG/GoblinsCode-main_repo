@@ -83,6 +83,7 @@ def event(fps):
 
                 if run.type == pg.USEREVENT and run.button == ingamebuttons["exit_from_game"]:
                     clearWorld()
+                    mobs.clear()
                     s["INGAME"] = False
                     s["ONPAUSE"] = False
                     s["INMENU"] = True
@@ -116,6 +117,7 @@ def event(fps):
                 s["player"]["health"] = 100
 
                 clearWorld()
+                mobs.clear()
 
                 s["INGAME"] = False
                 s["ONPAUSE"] = False

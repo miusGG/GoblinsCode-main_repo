@@ -1,6 +1,5 @@
 import pygame as pg
 
-
 class Mob():
     def __init__(self, texture, cor, health, weapon, ai=None):
         self.health = health

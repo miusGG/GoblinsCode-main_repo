@@ -1,6 +1,5 @@
 from random import *
 from settings import set as s
-
 blocks = ["dirt", "dirtwithwall", "dirtwithcorner", "dirtwithcorner2"]
 
 # Определяет сгенерирована ли последняя комната.
