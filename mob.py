@@ -1,5 +1,6 @@
 import pygame as pg
 
+
 class Mob():
     def __init__(self, texture, cor, health, weapon, ai=None):
         self.health = health
@@ -15,16 +16,17 @@ class Mob():
         ]
         self.ai = ai
 
-    #Добавление ИИ.
+    # Добавление ИИ.
     def addAI(self, ai):
         self.ai = ai
 
-    #Обновление ИИ
+    # Обновление ИИ
     def updateAI(self, ingame, onpause):
         if self.ai != None and ingame and not onpause:
             self.ai()
 
-#Все мобы
+
+# Все мобы
 mobs = []
 
 
@@ -36,5 +38,6 @@ class MobNow(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = 100
         self.rect.y = 100
+
 
 import createmobs

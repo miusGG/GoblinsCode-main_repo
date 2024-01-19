@@ -1,13 +1,9 @@
-import math
-
 from mob import Mob
 from mob import mobs
-from mob import MobNow
-import pygame
-import time
-import threading
 from settings import set as s
-#Прототип нового моба
+
+
+# Прототип нового моба
 def glider(mob):
     if mob.pos[0] < s['player']['posx']:
         mob.pos[0] += 1 / s["FPS"].get_fps()
@@ -18,8 +14,11 @@ def glider(mob):
     else:
         mob.pos[1] -= 1 / s["FPS"].get_fps()
 
+
 # Добавление мобов
 roomsize = s["roomSize"] * 2 + 6
+
+
 def spawn(type, c, AI):
     if type == 1:
         x = 0

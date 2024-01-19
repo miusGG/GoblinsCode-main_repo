@@ -1,5 +1,6 @@
 from random import *
 from settings import set as s
+
 blocks = ["dirt", "dirtwithwall", "dirtwithcorner", "dirtwithcorner2"]
 
 # Определяет сгенерирована ли последняя комната.
@@ -139,7 +140,7 @@ wC = [
 ]
 
 
-class Generate():
+class Generate:
     def __init__(self):
         pass
 
@@ -190,7 +191,7 @@ class Generate():
             self.generateDoors = self.doors[:1]
 
         # Сгенирирована ли последняя комната
-        if rooms[str(c[0])][str(c[1])] == 15:
+        if rooms[str(c[0])][str(c[1])] == 8:
             if (not lastRoom):
                 args[1] = 0
                 lastRoom = True
@@ -259,15 +260,15 @@ class Generate():
     # Генирация наполнения
     def generateFilling(self, type, c):
         if type == -1:
-            for i in range(10):
+            for i in range(4):
                 x = randint(-s["roomSize"], s["roomSize"] - 1)
                 y = randint(-s["roomSize"], s["roomSize"] - 1)
-                # self.addBlockToSecondLayer((x + c[0] * roomsize, y + c[1] * roomsize), "frog", 0)
+                self.addBlockToSecondLayer((x + c[0] * roomsize, y + c[1] * roomsize), "blood", 0)
         if type == 0:
-            for i in range(2):
+            for i in range(13):
                 x = randint(-s["roomSize"], s["roomSize"] - 1)
                 y = randint(-s["roomSize"], s["roomSize"] - 1)
-                # self.addBlockToSecondLayer((x + c[0] * roomsize, y + c[1] * roomsize), "frog", 0)
+                self.addBlockToSecondLayer((x + c[0] * roomsize, y + c[1] * roomsize), "gold", 0)
 
     def generateFug(self):
         pass

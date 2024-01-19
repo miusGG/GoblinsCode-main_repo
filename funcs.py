@@ -11,7 +11,7 @@ debug_prefix = "[MF]"
 count = 0
 
 
-#Создания ИИ мобов.
+# Создания ИИ мобов.
 def frog(mob):
     mob_pos_x = mob.pos[0]
     mob_pos_y = mob.pos[1]
@@ -32,6 +32,7 @@ def frog(mob):
         mob.pos[1] += 1 / s["FPS"].get_fps()
     else:
         mob.pos[1] -= 1 / s["FPS"].get_fps()
+
 
 # Отрисовка 3 слоев игры.
 def drawImgs(x, y, keyx, keyy, sc):
@@ -105,7 +106,6 @@ def addWeapon(pos_y, pos_x, texture, damage=1, radius=1, kd=1):
 
     if s["player"][pos_x] < radius and s["player"][pos_y]:
         s["player"]["health"] = s["player"]["health"] - 1
-
 
 
 # Проверка коллизий для игрока и моба

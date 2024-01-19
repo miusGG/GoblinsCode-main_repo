@@ -1,80 +1,79 @@
 import pygame as pg
 from draw_menu import ImageButton
 
-
-#Все настройки игры.
+# Все настройки игры.
 set = {
-    "FPS" : 0,
-    "INGAME" : False,
-    "INMENU" : True,
-    "INSETTINGS" : False,
-    "INVIDEOSETTINGS" : False,
-    "ONPAUSE" : False,
+    "FPS": 0,
+    "INGAME": False,
+    "INMENU": True,
+    "INSETTINGS": False,
+    "INVIDEOSETTINGS": False,
+    "ONPAUSE": False,
     "lastRoom": False,
-    "OPENEDMAP" : False,
-    "DISPLAY" : [1920, 1080],
-    "MINIMAP" : [50, 300, 100],
-    "WINNAME" : "GoblinsGold",
-    "countrooms" : 0,
-    "ceilSize" : 100,
+    "OPENEDMAP": False,
+    "DISPLAY": [1920, 1080],
+    "MINIMAP": [50, 300, 100],
+    "WINNAME": "GoblinsGold",
+    "countrooms": 0,
+    "ceilSize": 100,
     "playerSize": 40,
-    "roomSize" : 7,
-    "showCollisions" : False,
-    "showCurCoords" : False,
-    "cx" : 0,
-    "cy" : 0,
-    "deth" : False,
-    "player" : {
-        "rotate" : False,
+    "roomSize": 7,
+    "showCollisions": False,
+    "showCurCoords": False,
+    "cx": 0,
+    "cy": 0,
+    "deth": False,
+    "player": {
+        "rotate": False,
         "health": 100,
-        "posx" : 0,
-        "posy" : 0,
-        "speedx" : 0,
-        "speedy" : 0,
-        "speed" : 10
+        "posx": 0,
+        "posy": 0,
+        "speedx": 0,
+        "speedy": 0,
+        "speed": 10
     },
-    "none_texture" : "dirt.png",
-    "player_texture" : "playerstay.png",
-    "animations":{
-        "player":[
+    "none_texture": "dirt.png",
+    "player_texture": "playerstay.png",
+    "animations": {
+        "player": [
             "entity/playerwalk1.png",
             "entity/playerwalk2.png"
         ],
-        "bleb":[
+        "bleb": [
             "entity/slime.png",
             "entity/slime2.png",
             "entity/slime3.png"
         ]
     },
     "textures": {
-        "gui" : {
+        "gui": {
 
         },
-        "animations":{
+        "animations": {
 
         },
-        "structures" : {
+        "structures": {
 
-        },"items" : {
+        }, "items": {
 
-        },"entity" : {
+        }, "entity": {
 
         }, "secondLayer": {
 
         }
     },
     "object": {
-        "gui" :{
-            "mainPicture" : "GoblinASS2.png",
-            "settingsPicture" : "GoblinASS.png"
+        "gui": {
+            "mainPicture": "GoblinASS2.png",
+            "settingsPicture": "GoblinASS.png"
         },
         "structures": {
-            "dirt" : "dirt.png",
-            "dirtwithwall" : "dirtwithwall.png",
-            "dirtwithcorner" : "dirtwithcorner.png",
-            "dirtwithcorner2" : "dirtwithcorner2.png",
-            "darkfade" : "darkfade.png",
-            "darkfadewithcorner" : "darkfadewithcorner.png"
+            "dirt": "dirt.png",
+            "dirtwithwall": "dirtwithwall.png",
+            "dirtwithcorner": "dirtwithcorner.png",
+            "dirtwithcorner2": "dirtwithcorner2.png",
+            "darkfade": "darkfade.png",
+            "darkfadewithcorner": "darkfadewithcorner.png"
         }, "items": {
 
         }, "entity": {
@@ -82,49 +81,71 @@ set = {
             "frog": "frog.jpg",
             "slime": "slime.png"
         }, "secondLayer": {
-            "frog" : "frog.jpg"
+            "blood": "canvas.png",
+            "gold": "canvas2.png"
         }
 
     }, "entity_damage_triggers": {
-            "bleb_options": {
-                "bleb-trigger": False,
-                "bled-damage": 100,
-                "bleb-kd": 14000
-            }
+        "bleb_options": {
+            "bleb-trigger": False,
+            "bled-damage": 45,
+            "bleb-kd": 12500
+        }
     }
 }
 
 WIDTH, HEIGHT = set["DISPLAY"]
 
-#Кноки под каждое меню
+# Кноки под каждое меню
 buttons = {
-    "start" : ImageButton(WIDTH - HEIGHT, HEIGHT / 2.5, WIDTH/6, HEIGHT/9, "НАЧАТЬ ИГРУ", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3"),
-    "exit" : ImageButton(WIDTH - HEIGHT, HEIGHT / 1.47, WIDTH/6, HEIGHT/9, "ВЫЙТИ", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3"),
-    "settings" : ImageButton(WIDTH - HEIGHT, HEIGHT / 1.85, WIDTH/6, HEIGHT/9, "НАСТРОЙКИ", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3"),
+    "start": ImageButton(WIDTH - HEIGHT, HEIGHT / 2.5, WIDTH / 6, HEIGHT / 9, "НАЧАТЬ ИГРУ", "startGame-button.png",
+                         "startGame-button_hoverd.png", "button_click.mp3"),
+    "exit": ImageButton(WIDTH - HEIGHT, HEIGHT / 1.47, WIDTH / 6, HEIGHT / 9, "ВЫЙТИ", "startGame-button.png",
+                        "startGame-button_hoverd.png", "button_click.mp3"),
+    "settings": ImageButton(WIDTH - HEIGHT, HEIGHT / 1.85, WIDTH / 6, HEIGHT / 9, "НАСТРОЙКИ", "startGame-button.png",
+                            "startGame-button_hoverd.png", "button_click.mp3"),
 }
 
 buttonsSettings = {
-    "video_set": ImageButton(WIDTH - HEIGHT, HEIGHT / 2.5, WIDTH/6, HEIGHT/9, "ВИДЕО", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3"),
-    "volme_set": ImageButton(WIDTH - HEIGHT, HEIGHT / 1.47, WIDTH/6, HEIGHT/9, "ЗВУК", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3"),
-    "exit_from_settings": ImageButton(WIDTH - HEIGHT, HEIGHT / 1.26, WIDTH/6, HEIGHT/9, "ВЫЙТИ", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3"),
-    "keys_set": ImageButton(WIDTH - HEIGHT, HEIGHT / 1.85, WIDTH/6, HEIGHT/9, "УПРАВЛЕНИЕ", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3")
+    "video_set": ImageButton(WIDTH - HEIGHT, HEIGHT / 2.5, WIDTH / 6, HEIGHT / 9, "ВИДЕО", "startGame-button.png",
+                             "startGame-button_hoverd.png", "button_click.mp3"),
+    "volme_set": ImageButton(WIDTH - HEIGHT, HEIGHT / 1.47, WIDTH / 6, HEIGHT / 9, "ЗВУК", "startGame-button.png",
+                             "startGame-button_hoverd.png", "button_click.mp3"),
+    "exit_from_settings": ImageButton(WIDTH - HEIGHT, HEIGHT / 1.26, WIDTH / 6, HEIGHT / 9, "ВЫЙТИ",
+                                      "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3"),
+    "keys_set": ImageButton(WIDTH - HEIGHT, HEIGHT / 1.85, WIDTH / 6, HEIGHT / 9, "УПРАВЛЕНИЕ", "startGame-button.png",
+                            "startGame-button_hoverd.png", "button_click.mp3")
 }
 
 buttonVideoSettings = {
-    "hightVideo" : ImageButton(WIDTH - HEIGHT, HEIGHT / 2.5, WIDTH/6, HEIGHT/9, "Hight", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3"),
-    "lowVideo" : ImageButton(WIDTH - HEIGHT, HEIGHT / 1.47, WIDTH/6, HEIGHT/9, "Low", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3"),
-    "mediumVideo" : ImageButton(WIDTH - HEIGHT, HEIGHT / 1.85, WIDTH/6, HEIGHT/9, "Medium", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3"),
-    "exit_from_video_settings": ImageButton(WIDTH - HEIGHT, HEIGHT / 1.26, WIDTH/6, HEIGHT/9, "ВЫЙТИ", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3")
+    "hightVideo": ImageButton(WIDTH - HEIGHT, HEIGHT / 2.5, WIDTH / 6, HEIGHT / 9, "Hight", "startGame-button.png",
+                              "startGame-button_hoverd.png", "button_click.mp3"),
+    "lowVideo": ImageButton(WIDTH - HEIGHT, HEIGHT / 1.47, WIDTH / 6, HEIGHT / 9, "Low", "startGame-button.png",
+                            "startGame-button_hoverd.png", "button_click.mp3"),
+    "mediumVideo": ImageButton(WIDTH - HEIGHT, HEIGHT / 1.85, WIDTH / 6, HEIGHT / 9, "Medium", "startGame-button.png",
+                               "startGame-button_hoverd.png", "button_click.mp3"),
+    "exit_from_video_settings": ImageButton(WIDTH - HEIGHT, HEIGHT / 1.26, WIDTH / 6, HEIGHT / 9, "ВЫЙТИ",
+                                            "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3")
 }
 
-
 ingamebuttons = {
-    "exit_from_game" : ImageButton(WIDTH/2-(252/2), 450, 302, 124, "ВЫЙТИ", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3")
+    "exit_from_game": ImageButton(WIDTH / 2 - (252 / 2), 450, 302, 124, "ВЫЙТИ", "startGame-button.png",
+                                  "startGame-button_hoverd.png", "button_click.mp3")
 }
 
 LastMenubButtons = {
-    "exit_to_menu": ImageButton(WIDTH/2-(252/2), 450, 302, 124, "ВЫЙТИ", "startGame-button.png", "startGame-button_hoverd.png", "button_click.mp3")
+    "exit_to_menu": ImageButton(WIDTH / 2 - (252 / 2), 450, 302, 124, "ВЫЙТИ", "startGame-button.png",
+                                "startGame-button_hoverd.png", "button_click.mp3"),
+    "text": ImageButton(WIDTH / 2 - (252 / 2), 300, 302, 124, "Победил!", "startGame-button.png",
+                        "startGame-button_hoverd.png", "button_click.mp3")
 }
+DethMenubButtons = {
+    "exit_to_menu": ImageButton(WIDTH / 2 - (252 / 2), 450, 302, 124, "ВЫЙТИ", "startGame-button.png",
+                                "startGame-button_hoverd.png", "button_click.mp3"),
+    "text": ImageButton(WIDTH / 2 - (252 / 2), 300, 302, 124, "ВЫ УМЕРЛИ! (ихииххи)", "startGame-button.png",
+                        "startGame-button_hoverd.png", "button_click.mp3")
+}
+
 
 # Функция для загрузки всех текстур
 def load():
