@@ -1,5 +1,5 @@
 import pygame as pg
-from settings import set as s
+from settings import set
 from settings import buttons, buttonsSettings, ingamebuttons, buttonVideoSettings, LastMenubButtons, DethMenubButtons
 from generate import collisions, world_map
 from funcs import playAnimation, drawImgs
@@ -12,23 +12,23 @@ font2 = pg.font.SysFont('arial', 45)
 
 # Функция отрисовки всех функций.
 def draw(sc, fps):
-    if s["INGAME"]:
+    if set["INGAME"]:
         draw_game(sc, fps)
-    elif s["INMENU"]:
-        s["player"]["posy"] = 0
-        s["player"]["posx"] = 0
+    elif set["INMENU"]:
+        set["player"]["posy"] = 0
+        set["player"]["posx"] = 0
         draw_menu(sc)
-    elif s["INSETTINGS"]:
+    elif set["INSETTINGS"]:
         draw_settings(sc)
-    elif s["INVIDEOSETTINGS"]:
+    elif set["INVIDEOSETTINGS"]:
         draw_video_settings(sc)
-    elif s["deth"]:
-        s["player"]["posy"] = 0
-        s["player"]["posx"] = 0
+    elif set["deth"]:
+        set["player"]["posy"] = 0
+        set["player"]["posx"] = 0
         draw_deth(sc)
-    elif s["lastRoom"]:
-        s["player"]["posy"] = 0
-        s["player"]["posx"] = 0
+    elif set["lastRoom"]:
+        set["player"]["posy"] = 0
+        set["player"]["posx"] = 0
         draw_lastmenu(sc)
 
 
@@ -89,13 +89,7 @@ def draw_video_settings(sc):
 
 # Функция отрисовки главного меню
 def draw_menu(sc):
-    sc.blit(pg.transform.scale(s["textures"]["gui"]["mainPicture"], s["DISPLAY"]), (0, 0))
-    # Создание кнопки - "Начать игру"
-    WIDTH, HEIGHT = s["DISPLAY"]
-    font = pg.font.Font(None, 104)
-    # text_surface = font.render("Goblins Gold!", True, (255, 255, 255))
-    # text_rect = text_surface.get_rect(center=(WIDTH / 2 - (104 / 2) + 30 + 20 + 10 + 10 + 10, 70))
-    # sc.blit(text_surface, text_rect)
+    sc.blit(pg.transform.scale(set["textures"]["gui"]["mainPicture"], set["DISPLAY"]), (0, 0))
 
     # Выводим кнопки
     buttons["settings"].check_hover(pg.mouse.get_pos())
@@ -114,37 +108,37 @@ def draw_game(sc, fps):
     w, h = pg.display.get_surface().get_size()
 
     # Цикл на отрисовку клеток
-    for i in range(0, int(w / 2) // s["ceilSize"] + 3):
-        for j in range(0, int(h / 2) // s["ceilSize"] + 3):
+    for i in range(0, int(w / 2) // set["ceilSize"] + 3):
+        for j in range(0, int(h / 2) // set["ceilSize"] + 3):
 
             # Костыль системы.
             corectx = 1
             corecty = 1
-            if (s["player"]['posx'] < 0):
+            if (set["player"]['posx'] < 0):
                 corectx = 0
-            if (s["player"]['posy'] < 0):
+            if (set["player"]['posy'] < 0):
                 corecty = 0
 
             # Получаем координаты из КЛЕТОК в ПИКСЕЛЯХ
-            x1 = w // 2 + i * s["ceilSize"] - (s["player"]['posx'] % 1) * s["ceilSize"] - s["ceilSize"] // 2
-            y1 = h // 2 + j * s["ceilSize"] - (s["player"]['posy'] % 1) * s["ceilSize"] - s["ceilSize"] // 2
-            keyx1 = str(int(s["player"]['posx']) + i - 1 + corectx)
-            keyy1 = str(int(s["player"]['posy']) + j - 1 + corecty)
+            x1 = w // 2 + i * set["ceilSize"] - (set["player"]['posx'] % 1) * set["ceilSize"] - set["ceilSize"] // 2
+            y1 = h // 2 + j * set["ceilSize"] - (set["player"]['posy'] % 1) * set["ceilSize"] - set["ceilSize"] // 2
+            keyx1 = str(int(set["player"]['posx']) + i - 1 + corectx)
+            keyy1 = str(int(set["player"]['posy']) + j - 1 + corecty)
 
-            x2 = w // 2 - i * s["ceilSize"] - (s["player"]['posx'] % 1) * s["ceilSize"] - s["ceilSize"] // 2
-            y2 = h // 2 + j * s["ceilSize"] - (s["player"]['posy'] % 1) * s["ceilSize"] - s["ceilSize"] // 2
-            keyx2 = str(int(s["player"]['posx']) - i - 1 + corectx)
-            keyy2 = str(int(s["player"]['posy']) + j - 1 + corecty)
+            x2 = w // 2 - i * set["ceilSize"] - (set["player"]['posx'] % 1) * set["ceilSize"] - set["ceilSize"] // 2
+            y2 = h // 2 + j * set["ceilSize"] - (set["player"]['posy'] % 1) * set["ceilSize"] - set["ceilSize"] // 2
+            keyx2 = str(int(set["player"]['posx']) - i - 1 + corectx)
+            keyy2 = str(int(set["player"]['posy']) + j - 1 + corecty)
 
-            x3 = w // 2 - i * s["ceilSize"] - (s["player"]['posx'] % 1) * s["ceilSize"] - s["ceilSize"] // 2
-            y3 = h // 2 - j * s["ceilSize"] - (s["player"]['posy'] % 1) * s["ceilSize"] - s["ceilSize"] // 2
-            keyx3 = str(int(s["player"]['posx']) - i - 1 + corectx)
-            keyy3 = str(int(s["player"]['posy']) - j - 1 + corecty)
+            x3 = w // 2 - i * set["ceilSize"] - (set["player"]['posx'] % 1) * set["ceilSize"] - set["ceilSize"] // 2
+            y3 = h // 2 - j * set["ceilSize"] - (set["player"]['posy'] % 1) * set["ceilSize"] - set["ceilSize"] // 2
+            keyx3 = str(int(set["player"]['posx']) - i - 1 + corectx)
+            keyy3 = str(int(set["player"]['posy']) - j - 1 + corecty)
 
-            x4 = w // 2 + i * s["ceilSize"] - (s["player"]['posx'] % 1) * s["ceilSize"] - s["ceilSize"] // 2
-            y4 = h // 2 - j * s["ceilSize"] - (s["player"]['posy'] % 1) * s["ceilSize"] - s["ceilSize"] // 2
-            keyx4 = str(int(s["player"]['posx']) + i - 1 + corectx)
-            keyy4 = str(int(s["player"]['posy']) - j - 1 + corecty)
+            x4 = w // 2 + i * set["ceilSize"] - (set["player"]['posx'] % 1) * set["ceilSize"] - set["ceilSize"] // 2
+            y4 = h // 2 - j * set["ceilSize"] - (set["player"]['posy'] % 1) * set["ceilSize"] - set["ceilSize"] // 2
+            keyx4 = str(int(set["player"]['posx']) + i - 1 + corectx)
+            keyy4 = str(int(set["player"]['posy']) - j - 1 + corecty)
 
             # Рисуем все клеточки на каждой части экрана
             drawImgs(x1, y1, keyx1, keyy1, sc)
@@ -153,18 +147,18 @@ def draw_game(sc, fps):
             drawImgs(x4, y4, keyx4, keyy4, sc)
 
     # Отображение колизий на f1
-    if s["showCollisions"]:
+    if set["showCollisions"]:
         # Создание колизии для игрока
-        x = w // 2 - s["ceilSize"] // 2
-        y = h // 2 - s["ceilSize"] // 2
+        x = w // 2 - set["ceilSize"] // 2
+        y = h // 2 - set["ceilSize"] // 2
         pg.draw.circle(sc, (255, 255, 255), (x, y), 5)
         pg.draw.rect(sc, (255, 255, 255),
-                     (w / 2 - s["ceilSize"] / 2, h / 2 - s["ceilSize"] / 2, s["ceilSize"], s["ceilSize"]), 1)
+                     (w / 2 - set["ceilSize"] / 2, h / 2 - set["ceilSize"] / 2, set["ceilSize"], set["ceilSize"]), 1)
         for i in collisions:
-            x = w // 2 + i[0][0] * s["ceilSize"] - (s["player"]["posx"]) * s["ceilSize"] - s["ceilSize"] // 2
-            y = h // 2 + i[0][1] * s["ceilSize"] - (s["player"]["posy"]) * s["ceilSize"] - s["ceilSize"] // 2
-            w2 = i[0][2] * s["ceilSize"]
-            h2 = i[0][3] * s["ceilSize"]
+            x = w // 2 + i[0][0] * set["ceilSize"] - (set["player"]["posx"]) * set["ceilSize"] - set["ceilSize"] // 2
+            y = h // 2 + i[0][1] * set["ceilSize"] - (set["player"]["posy"]) * set["ceilSize"] - set["ceilSize"] // 2
+            w2 = i[0][2] * set["ceilSize"]
+            h2 = i[0][3] * set["ceilSize"]
             # Колизии для стен
             if i[1] == "stop":
                 color = (255, 0, 0)
@@ -175,24 +169,24 @@ def draw_game(sc, fps):
             pg.draw.rect(sc, color, (x, y, w2, h2), 1)
     # Отрисовка мобов
     for i in mobs:
-        x = w // 2 + i.pos[0] * s["ceilSize"] - (s["player"]["posx"]) * s["ceilSize"] - s["ceilSize"] // 2
-        y = h // 2 + i.pos[1] * s["ceilSize"] - (s["player"]["posy"]) * s["ceilSize"] - s["ceilSize"] // 2
-        sc.blit(pg.transform.scale(s["textures"]["entity"][i.texture], (s["ceilSize"], s["ceilSize"])), (x, y))
+        x = w // 2 + i.pos[0] * set["ceilSize"] - (set["player"]["posx"]) * set["ceilSize"] - set["ceilSize"] // 2
+        y = h // 2 + i.pos[1] * set["ceilSize"] - (set["player"]["posy"]) * set["ceilSize"] - set["ceilSize"] // 2
+        sc.blit(pg.transform.scale(set["textures"]["entity"][i.texture], (set["ceilSize"], set["ceilSize"])), (x, y))
 
     # Отрисовка игрока
-    if (s["player"]["speedx"] != 0) or (s["player"]["speedy"] != 0):
-        sc.blit(pg.transform.flip(pg.transform.scale(playAnimation("player", 30), (s["ceilSize"], s["ceilSize"])),
-                                  s["player"]["rotate"], False), (w / 2 - s["ceilSize"] / 2, h / 2 - s["ceilSize"] / 2))
+    if (set["player"]["speedx"] != 0) or (set["player"]["speedy"] != 0):
+        sc.blit(pg.transform.flip(pg.transform.scale(playAnimation("player", 30), (set["ceilSize"], set["ceilSize"])),
+                                  set["player"]["rotate"], False), (w / 2 - set["ceilSize"] / 2, h / 2 - set["ceilSize"] / 2))
     else:
-        sc.blit(pg.transform.flip(pg.transform.scale(s["player"]["texture"], (s["ceilSize"], s["ceilSize"])),
-                                  s["player"]["rotate"], False), (w / 2 - s["ceilSize"] / 2, h / 2 - s["ceilSize"] / 2))
+        sc.blit(pg.transform.flip(pg.transform.scale(set["player"]["texture"], (set["ceilSize"], set["ceilSize"])),
+                                  set["player"]["rotate"], False), (w / 2 - set["ceilSize"] / 2, h / 2 - set["ceilSize"] / 2))
 
     # health bar
     pg.draw.rect(sc, (255, 204, 204), (100, 930, 300, 30))
-    pg.draw.rect(sc, (255, 51, 51), (100, 930, (300 / 100) * s["player"]['health'], 30))
+    pg.draw.rect(sc, (255, 51, 51), (100, 930, (300 / 100) * set["player"]['health'], 30))
 
     # Координаты и ФПС
-    img1 = font.render("X:" + str(int(s["player"]['posx'])) + " Y:" + str(int(s["player"]['posy'])), True, (0, 0, 0))
+    img1 = font.render("X:" + str(int(set["player"]['posx'])) + " Y:" + str(int(set["player"]['posy'])), True, (0, 0, 0))
     img2 = font.render("FPS:" + str(int(fps)), True, (0, 0, 0))
     sc.blit(img1, (100, 360))
     sc.blit(img2, (100, 390))
@@ -201,7 +195,7 @@ def draw_game(sc, fps):
     draw_minimap(sc)
 
     # Отрисовка паузы
-    if s["ONPAUSE"]:
+    if set["ONPAUSE"]:
         draw_onpause(sc)
 
     # Обновление экрана
@@ -211,36 +205,36 @@ def draw_game(sc, fps):
 # Функция открисовки миникарты
 def draw_minimap(sc):
     pg.draw.rect(sc, (40, 40, 40),
-                 (s["MINIMAP"][0] - 5, s["MINIMAP"][0] - 5, s["MINIMAP"][1] + 10, s["MINIMAP"][1] + 10))
-    pg.draw.rect(sc, (80, 80, 80), (s["MINIMAP"][0], s["MINIMAP"][0], s["MINIMAP"][1], s["MINIMAP"][1]))
+                 (set["MINIMAP"][0] - 5, set["MINIMAP"][0] - 5, set["MINIMAP"][1] + 10, set["MINIMAP"][1] + 10))
+    pg.draw.rect(sc, (80, 80, 80), (set["MINIMAP"][0], set["MINIMAP"][0], set["MINIMAP"][1], set["MINIMAP"][1]))
 
     for i in world_map:
         for j in world_map[i]:
             # Координаты и размеры комнаты на миникарте (создание самих комнат)
             coord = [
                 [
-                    int(i) * (s["MINIMAP"][2]) + s["MINIMAP"][1] // 2 - (s["player"]["posx"]) * (
-                            s["MINIMAP"][2] / (s["roomSize"] * 2 + 6)) - 4 + 12.5,
-                    int(j) * (s["MINIMAP"][2]) + s["MINIMAP"][1] // 2 - (s["player"]["posy"]) * (
-                            s["MINIMAP"][2] / (s["roomSize"] * 2 + 6)) - 4 + 12.5,
-                    s["MINIMAP"][2] - 25,
-                    s["MINIMAP"][2] - 25
+                    int(i) * (set["MINIMAP"][2]) + set["MINIMAP"][1] // 2 - (set["player"]["posx"]) * (
+                            set["MINIMAP"][2] / (set["roomSize"] * 2 + 6)) - 4 + 12.5,
+                    int(j) * (set["MINIMAP"][2]) + set["MINIMAP"][1] // 2 - (set["player"]["posy"]) * (
+                            set["MINIMAP"][2] / (set["roomSize"] * 2 + 6)) - 4 + 12.5,
+                    set["MINIMAP"][2] - 25,
+                    set["MINIMAP"][2] - 25
                 ],
                 [
-                    int(i) * (s["MINIMAP"][2]) + s["MINIMAP"][1] // 2 - (s["player"]["posx"]) * (
-                            s["MINIMAP"][2] / (s["roomSize"] * 2 + 6)) - 4,
-                    int(j) * (s["MINIMAP"][2]) + s["MINIMAP"][1] // 2 - (s["player"]["posy"]) * (
-                            s["MINIMAP"][2] / (s["roomSize"] * 2 + 6)) - 4 + 6.25 + (s["MINIMAP"][2] - 25) // 2,
-                    s["MINIMAP"][2],
+                    int(i) * (set["MINIMAP"][2]) + set["MINIMAP"][1] // 2 - (set["player"]["posx"]) * (
+                            set["MINIMAP"][2] / (set["roomSize"] * 2 + 6)) - 4,
+                    int(j) * (set["MINIMAP"][2]) + set["MINIMAP"][1] // 2 - (set["player"]["posy"]) * (
+                            set["MINIMAP"][2] / (set["roomSize"] * 2 + 6)) - 4 + 6.25 + (set["MINIMAP"][2] - 25) // 2,
+                    set["MINIMAP"][2],
                     12.5
                 ],
                 [
-                    int(i) * (s["MINIMAP"][2]) + s["MINIMAP"][1] // 2 - (s["player"]["posx"]) * (
-                            s["MINIMAP"][2] / (s["roomSize"] * 2 + 6)) - 4 + 6.25 + (s["MINIMAP"][2] - 25) // 2,
-                    int(j) * (s["MINIMAP"][2]) + s["MINIMAP"][1] // 2 - (s["player"]["posy"]) * (
-                            s["MINIMAP"][2] / (s["roomSize"] * 2 + 6)) - 4,
+                    int(i) * (set["MINIMAP"][2]) + set["MINIMAP"][1] // 2 - (set["player"]["posx"]) * (
+                            set["MINIMAP"][2] / (set["roomSize"] * 2 + 6)) - 4 + 6.25 + (set["MINIMAP"][2] - 25) // 2,
+                    int(j) * (set["MINIMAP"][2]) + set["MINIMAP"][1] // 2 - (set["player"]["posy"]) * (
+                            set["MINIMAP"][2] / (set["roomSize"] * 2 + 6)) - 4,
                     12.5,
-                    s["MINIMAP"][2]
+                    set["MINIMAP"][2]
                 ]
             ]
 
@@ -258,27 +252,27 @@ def draw_minimap(sc):
 
             # Цикл чтобы комнаты не вылезали за миникарту
             for d in coord:
-                if (d[0] >= s["MINIMAP"][1] + s["MINIMAP"][0]):
-                    d[0] = s["MINIMAP"][1] + s["MINIMAP"][0]
+                if (d[0] >= set["MINIMAP"][1] + set["MINIMAP"][0]):
+                    d[0] = set["MINIMAP"][1] + set["MINIMAP"][0]
                     d[2] = 0
                     d[3] = 0
-                elif (d[0] + d[2] >= s["MINIMAP"][1] + s["MINIMAP"][0]):
-                    d[2] = s["MINIMAP"][1] + s["MINIMAP"][0] - d[0] + 1
+                elif (d[0] + d[2] >= set["MINIMAP"][1] + set["MINIMAP"][0]):
+                    d[2] = set["MINIMAP"][1] + set["MINIMAP"][0] - d[0] + 1
 
-                if (d[0] <= s["MINIMAP"][0]):
-                    d[2] -= abs(d[0] - s["MINIMAP"][0])
-                    d[0] = s["MINIMAP"][0]
+                if (d[0] <= set["MINIMAP"][0]):
+                    d[2] -= abs(d[0] - set["MINIMAP"][0])
+                    d[0] = set["MINIMAP"][0]
 
-                if (d[1] >= s["MINIMAP"][1] + s["MINIMAP"][0]):
-                    d[1] = s["MINIMAP"][1] + s["MINIMAP"][0]
+                if (d[1] >= set["MINIMAP"][1] + set["MINIMAP"][0]):
+                    d[1] = set["MINIMAP"][1] + set["MINIMAP"][0]
                     d[2] = 0
                     d[3] = 0
-                elif (d[1] + d[3] >= s["MINIMAP"][1] + s["MINIMAP"][0]):
-                    d[3] = s["MINIMAP"][1] + s["MINIMAP"][0] - d[1] + 1
+                elif (d[1] + d[3] >= set["MINIMAP"][1] + set["MINIMAP"][0]):
+                    d[3] = set["MINIMAP"][1] + set["MINIMAP"][0] - d[1] + 1
 
-                if (d[1] <= s["MINIMAP"][0]):
-                    d[3] -= abs(d[1] - s["MINIMAP"][0])
-                    d[1] = s["MINIMAP"][0]
+                if (d[1] <= set["MINIMAP"][0]):
+                    d[3] -= abs(d[1] - set["MINIMAP"][0])
+                    d[1] = set["MINIMAP"][0]
 
             # Задаем цвет по типу команты
             if (world_map[i][j][1] == -1):
@@ -293,4 +287,4 @@ def draw_minimap(sc):
             pg.draw.rect(sc, color, (coord[2][0], coord[2][1], coord[2][2], coord[2][3]))
             pg.draw.rect(sc, color, (coord[0][0], coord[0][1], coord[0][2], coord[0][3]))
     # Отображение игрока (красная точка)
-    pg.draw.circle(sc, (255, 0, 0), (s["MINIMAP"][0] + s["MINIMAP"][1] // 2, s["MINIMAP"][0] + s["MINIMAP"][1] // 2), 4)
+    pg.draw.circle(sc, (255, 0, 0), (set["MINIMAP"][0] + set["MINIMAP"][1] // 2, set["MINIMAP"][0] + set["MINIMAP"][1] // 2), 4)

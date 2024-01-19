@@ -1,22 +1,22 @@
 from mob import Mob
 from mob import mobs
-from settings import set as s
+from settings import set
 
 
 # Прототип нового моба
 def glider(mob):
-    if mob.pos[0] < s['player']['posx']:
-        mob.pos[0] += 1 / s["FPS"].get_fps()
+    if mob.pos[0] < set['player']['posx']:
+        mob.pos[0] += 1 / set["FPS"].get_fps()
     else:
-        mob.pos[0] -= 1 / s["FPS"].get_fps()
-    if mob.pos[1] < s['player']['posy']:
-        mob.pos[1] += 1 / s["FPS"].get_fps()
+        mob.pos[0] -= 1 / set["FPS"].get_fps()
+    if mob.pos[1] < set['player']['posy']:
+        mob.pos[1] += 1 / set["FPS"].get_fps()
     else:
-        mob.pos[1] -= 1 / s["FPS"].get_fps()
+        mob.pos[1] -= 1 / set["FPS"].get_fps()
 
 
 # Добавление мобов
-roomsize = s["roomSize"] * 2 + 6
+roomsize = set["roomSize"] * 2 + 6
 
 
 def spawn(type, c, AI):

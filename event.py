@@ -1,7 +1,7 @@
 import sys
 import pygame as pg
 
-from settings import set as s
+from settings import set
 from funcs import checkCollisionx, checkCollisiony
 from settings import buttons, buttonsSettings, ingamebuttons, buttonVideoSettings, LastMenubButtons
 from generate import gen, clearWorld
@@ -11,11 +11,11 @@ from mob import mobs
 # Обновление ИИ мобов.
 def mobsAI():
     for i in mobs:
-        i.updateAI(s["INGAME"], s["ONPAUSE"])
+        i.updateAI(set["INGAME"], set["ONPAUSE"])
 
 
 # Тип инвентов для получения урона
-BLEBDAMAGEEVENT, timer = pg.USEREVENT + 1, s["entity_damage_triggers"]["bleb_options"]["bleb-kd"]
+BLEBDAMAGEEVENT, timer = pg.USEREVENT + 1, set["entity_damage_triggers"]["bleb_options"]["bleb-kd"]
 
 
 # Функция ИВЕНТОВ
@@ -25,172 +25,171 @@ def event(fps):
             sys.exit()
 
         # Кнопки для МЕНЮ
-        if s["INMENU"]:
+        if set["INMENU"]:
             for j in buttons:
-                buttons[j].handle_event(run, s["INGAME"])
+                buttons[j].handle_event(run, set["INGAME"])
                 buttons[j].check_hover(pg.mouse.get_pos())
 
                 if run.type == pg.USEREVENT and run.button == buttons["start"]:
-                    s["INGAME"] = True
-                    s["INMENU"] = False
+                    set["INGAME"] = True
+                    set["INMENU"] = False
                     gen.generateRoom((0, 0), [2, -1])
 
                 if run.type == pg.USEREVENT and run.button == buttons["settings"]:
-                    s["INMENU"] = False
-                    s["INSETTINGS"] = True
+                    set["INMENU"] = False
+                    set["INSETTINGS"] = True
 
                 if run.type == pg.USEREVENT and run.button == buttons["exit"]:
                     pg.quit()
 
         # Кнопки для настроек
-        if s["INSETTINGS"]:
+        if set["INSETTINGS"]:
             for j in buttonsSettings:
-                buttonsSettings[j].handle_event(run, s["INGAME"])
+                buttonsSettings[j].handle_event(run, set["INGAME"])
                 buttonsSettings[j].check_hover(pg.mouse.get_pos())
 
                 if run.type == pg.USEREVENT and run.button == buttonsSettings["exit_from_settings"]:
-                    s["INSETTINGS"] = False
-                    s["INMENU"] = True
+                    set["INSETTINGS"] = False
+                    set["INMENU"] = True
 
                 if run.type == pg.USEREVENT and run.button == buttonsSettings["video_set"]:
-                    s["INSETTINGS"] = False
-                    s["INVIDEOSETTINGS"] = True
+                    set["INSETTINGS"] = False
+                    set["INVIDEOSETTINGS"] = True
 
         # Кнопки для настроек видео
-        if s["INVIDEOSETTINGS"]:
+        if set["INVIDEOSETTINGS"]:
             for j in buttonVideoSettings:
-                buttonVideoSettings[j].handle_event(run, s["INGAME"])
+                buttonVideoSettings[j].handle_event(run, set["INGAME"])
                 buttonVideoSettings[j].check_hover(pg.mouse.get_pos())
 
                 if run.type == pg.USEREVENT and run.button == buttonVideoSettings['hightVideo']:
-                    print(0)
+                    pass
 
                 if run.type == pg.USEREVENT and run.button == buttonVideoSettings['lowVideo']:
-                    print(0)
+                    pass
 
                 if run.type == pg.USEREVENT and run.button == buttonVideoSettings['mediumVideo']:
-                    print(0)
+                    pass
 
                 if run.type == pg.USEREVENT and run.button == buttonVideoSettings['exit_from_video_settings']:
-                    s["INSETTINGS"] = True
-                    s["INVIDEOSETTING"] = False
+                    set["INSETTINGS"] = True
+                    set["INVIDEOSETTING"] = False
 
         # Кнопки для паузы
-        if s["ONPAUSE"] and s["INGAME"]:
+        if set["ONPAUSE"] and set["INGAME"]:
             for j in ingamebuttons:
-                ingamebuttons[j].handle_event(run, s["INGAME"])
+                ingamebuttons[j].handle_event(run, set["INGAME"])
                 ingamebuttons[j].check_hover(pg.mouse.get_pos())
 
                 if run.type == pg.USEREVENT and run.button == ingamebuttons["exit_from_game"]:
                     clearWorld()
                     mobs.clear()
-                    s["INGAME"] = False
-                    s["ONPAUSE"] = False
-                    s["INMENU"] = True
+                    set["INGAME"] = False
+                    set["ONPAUSE"] = False
+                    set["INMENU"] = True
 
-        if s["lastRoom"]:
-            s["INGAME"] = False
-            s["ONPAUSE"] = False
-            s["INMENU"] = False
-            s["deth"] = False
+        if set["lastRoom"]:
+            set["INGAME"] = False
+            set["ONPAUSE"] = False
+            set["deth"] = False
 
             for j in LastMenubButtons:
-                LastMenubButtons[j].handle_event(run, s["INGAME"])
+                LastMenubButtons[j].handle_event(run, set["INGAME"])
                 LastMenubButtons[j].check_hover(pg.mouse.get_pos())
 
                 if run.type == pg.USEREVENT and run.button == LastMenubButtons["exit_to_menu"]:
                     clearWorld()
-                    s["INGAME"] = False
-                    s["ONPAUSE"] = False
-                    s["INMENU"] = True
+                    set["INGAME"] = False
+                    set["ONPAUSE"] = False
+                    set["INMENU"] = True
 
         # Если СМЭЭЭРТъ!
-        if s["deth"]:
+        if set["deth"]:
             for j in ingamebuttons:
-                ingamebuttons[j].handle_event(run, s["INGAME"])
+                ingamebuttons[j].handle_event(run, set["INGAME"])
                 ingamebuttons[j].check_hover(pg.mouse.get_pos())
 
                 # Тут мы убираем все тригеры дамага
-                s["entity_damage_triggers"]["bleb_options"]["bleb-trigger"] = False
+                set["entity_damage_triggers"]["bleb_options"]["bleb-trigger"] = False
 
-                s["player"]["health"] = 100
+                set["player"]["health"] = 100
 
                 clearWorld()
                 mobs.clear()
 
-                s["INGAME"] = False
-                s["ONPAUSE"] = False
-                s["INMENU"] = False
+                set["INGAME"] = False
+                set["ONPAUSE"] = False
+                set["INMENU"] = False
 
                 if run.type == pg.USEREVENT and run.button == ingamebuttons["exit_from_game"]:
-                    s["deth"] = False
-                    s["INGAME"] = False
-                    s["ONPAUSE"] = False
-                    s["INMENU"] = True
+                    set["deth"] = False
+                    set["INGAME"] = False
+                    set["ONPAUSE"] = False
+                    set["INMENU"] = True
 
         if run.type == pg.USEREVENT and run.button == buttons["exit"]:
             pg.quit()
 
         # Если крутиться колёсико мышки то клетки УВЕЛИЧИВАЮТСЯ или УМЕНЬШАЮТСЯ в ширину или в длинну
         if run.type == pg.MOUSEWHEEL:
-            if (s["ceilSize"] + run.y * 2 > 0) and (not s["ONPAUSE"]):
-                s["ceilSize"] += run.y * 2
+            if (set["ceilSize"] + run.y * 2 > 0) and (not set["ONPAUSE"]):
+                set["ceilSize"] += run.y * 2
         if run.type == pg.MOUSEMOTION:
-            s["cx"] = run.pos[0]
-            s["cy"] = run.pos[1]
+            set["cx"] = run.pos[0]
+            set["cy"] = run.pos[1]
 
         # События для получения урона от мобов
-        if run.type == BLEBDAMAGEEVENT and s["entity_damage_triggers"]["bleb_options"]["bleb-trigger"]:
-            s["player"]["health"] = s["player"]["health"] - s["entity_damage_triggers"]["bleb_options"]["bled-damage"]
-            s["deth"] = True
-            s["INGAME"] = False
-            s["INMENU"] = False
+        if run.type == BLEBDAMAGEEVENT and set["entity_damage_triggers"]["bleb_options"]["bleb-trigger"]:
+            set["player"]["health"] = set["player"]["health"] - set["entity_damage_triggers"]["bleb_options"]["bled-damage"]
+            set["deth"] = True
+            set["INGAME"] = False
+            set["INMENU"] = False
 
         # Если кнопка НАЖАТА то игрок может ходить
         if run.type == pg.KEYDOWN:
             if run.key == pg.K_ESCAPE:
-                if s["INGAME"]:
-                    if s["ONPAUSE"]:
-                        s["ONPAUSE"] = False
+                if set["INGAME"]:
+                    if set["ONPAUSE"]:
+                        set["ONPAUSE"] = False
                     else:
-                        s["ONPAUSE"] = True
+                        set["ONPAUSE"] = True
             if run.key == pg.K_TAB:
-                s["MINIMAP"][1] = 1000
+                set["MINIMAP"][1] = 1000
 
             # При нажатии F1 показываются КОЛЛИЗИИИ
             if run.key == pg.K_F1:
-                s["showCollisions"] = not s["showCollisions"]
+                set["showCollisions"] = not set["showCollisions"]
 
             if run.key == pg.K_w:
-                s["player"]["speedy"] -= s["player"]["speed"]
+                set["player"]["speedy"] -= set["player"]["speed"]
             if run.key == pg.K_a:
-                s["player"]["speedx"] -= s["player"]["speed"]
+                set["player"]["speedx"] -= set["player"]["speed"]
             if run.key == pg.K_s:
-                s["player"]["speedy"] += s["player"]["speed"]
+                set["player"]["speedy"] += set["player"]["speed"]
             if run.key == pg.K_d:
-                s["player"]["speedx"] += s["player"]["speed"]
+                set["player"]["speedx"] += set["player"]["speed"]
 
         # Если кнопка ОТЖАТА то игрок теряет скорость
         if run.type == pg.KEYUP:
             if run.key == pg.K_TAB:
-                s["MINIMAP"][1] = 300
+                set["MINIMAP"][1] = 300
             if run.key == pg.K_w:
-                s["player"]["speedy"] += s["player"]["speed"]
+                set["player"]["speedy"] += set["player"]["speed"]
             if run.key == pg.K_a:
-                s["player"]["speedx"] += s["player"]["speed"]
+                set["player"]["speedx"] += set["player"]["speed"]
             if run.key == pg.K_s:
-                s["player"]["speedy"] -= s["player"]["speed"]
+                set["player"]["speedy"] -= set["player"]["speed"]
             if run.key == pg.K_d:
-                s["player"]["speedx"] -= s["player"]["speed"]
+                set["player"]["speedx"] -= set["player"]["speed"]
 
     # проверка есть ли туда куда хочет пойти игрок припятствие
-    if not s["ONPAUSE"]:
-        if ((s["player"]["speedx"] != 0) or (s["player"]["speedy"] != 0)) and (fps != 0):
-            if checkCollisionx(s["player"]["posx"] + s["player"]["speedx"] / fps):
-                s["player"]["posx"] += s["player"]["speedx"] / fps
-            if checkCollisiony(s["player"]["posy"] + s["player"]["speedy"] / fps):
-                s["player"]["posy"] += s["player"]["speedy"] / fps
-        if s["player"]["speedx"] > 0:
-            s["player"]["rotate"] = False
-        elif s["player"]["speedx"] < 0:
-            s["player"]["rotate"] = True
+    if not set["ONPAUSE"]:
+        if ((set["player"]["speedx"] != 0) or (set["player"]["speedy"] != 0)) and (fps != 0):
+            if checkCollisionx(set["player"]["posx"] + set["player"]["speedx"] / fps):
+                set["player"]["posx"] += set["player"]["speedx"] / fps
+            if checkCollisiony(set["player"]["posy"] + set["player"]["speedy"] / fps):
+                set["player"]["posy"] += set["player"]["speedy"] / fps
+        if set["player"]["speedx"] > 0:
+            set["player"]["rotate"] = False
+        elif set["player"]["speedx"] < 0:
+            set["player"]["rotate"] = True

@@ -1,5 +1,5 @@
 import pygame as pg
-from settings import set as s
+from settings import set
 from settings import load
 from event import event, mobsAI
 from draw import draw
@@ -7,15 +7,15 @@ from draw import draw
 pg.init()
 
 # Устанавливаем параметры экрана и название окна.
-sc = pg.display.set_mode((s["DISPLAY"][0], s["DISPLAY"][1]))
-pg.display.set_caption(s["WINNAME"])
+sc = pg.display.set_mode((set["DISPLAY"][0], set["DISPLAY"][1]))
+pg.display.set_caption(set["WINNAME"])
 
 # Тип инвента для получения урона
 DAMAGEEVENT, timer = pg.USEREVENT + 1, 3000
 pg.time.set_timer(DAMAGEEVENT, timer)
 
 clock = pg.time.Clock()
-s["FPS"] = clock
+set["FPS"] = clock
 
 # Подгрузкка всех текстур
 load()
