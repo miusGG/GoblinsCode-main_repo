@@ -2,9 +2,7 @@ import sys
 from generate import world, world_second_layer, fug_map, gen, doors2
 from generate import collisions as col
 import pygame as pg
-from pygame.locals import *
 from createmobs import spawn
-
 from settings import set as s
 
 debug_prefix = "[MF]"

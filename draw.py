@@ -1,9 +1,7 @@
 import pygame as pg
-import time
-
 from settings import set as s
 from settings import buttons, buttonsSettings, ingamebuttons, buttonVideoSettings, LastMenubButtons, DethMenubButtons
-from generate import world, collisions, world_map
+from generate import collisions, world_map
 from funcs import playAnimation, drawImgs
 from mob import mobs
 
