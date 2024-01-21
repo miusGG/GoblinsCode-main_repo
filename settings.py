@@ -136,13 +136,15 @@ ingamebuttons = {
 LastMenubButtons = {
     "exit_to_menu": ImageButton(WIDTH / 2 - (252 / 2), 450, 302, 124, "ВЫЙТИ", "startGame-button.png",
                                 "startGame-button_hoverd.png", "button_click.mp3"),
-    "text": ImageButton(WIDTH / 2 - (252 / 2), 300, 302, 124, "Победил!", "startGame-button.png",
+    "text": ImageButton(WIDTH / 2 - (252 / 2) - 100, 300, 502, 124, "Победил! Вы прошли 8 комнат!", "startGame-button"
+                                                                                                    ".png",
                         "startGame-button_hoverd.png", "button_click.mp3")
 }
 DethMenubButtons = {
     "exit_to_menu": ImageButton(WIDTH / 2 - (252 / 2), 450, 302, 124, "ВЫЙТИ", "startGame-button.png",
                                 "startGame-button_hoverd.png", "button_click.mp3"),
-    "text": ImageButton(WIDTH / 2 - (252 / 2), 300, 302, 124, "ВЫ УМЕРЛИ! (ихииххи)", "startGame-button.png",
+    "text": ImageButton(WIDTH / 2 - (252 / 2) - 100, 300, 502, 124, "ВЫ УМЕРЛИ! Вы не прошли 8 комнат!", "startGame"
+                                                                                                         "-button.png",
                         "startGame-button_hoverd.png", "button_click.mp3")
 }
 

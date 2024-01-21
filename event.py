@@ -93,6 +93,9 @@ def event(fps):
             set["ONPAUSE"] = False
             set["deth"] = False
 
+            with open('stats.txt', 'w') as file:
+                file.write('Вы победили, пройдя 8 команат!')
+
             for j in LastMenubButtons:
                 LastMenubButtons[j].handle_event(run, set["INGAME"])
                 LastMenubButtons[j].check_hover(pg.mouse.get_pos())
@@ -105,6 +108,10 @@ def event(fps):
 
         # Если СМЭЭЭРТъ!
         if set["deth"]:
+
+            with open('stats.txt', 'w') as file:
+                file.write('Вы проиграли, не пройдя 8 комнат(')
+
             for j in ingamebuttons:
                 ingamebuttons[j].handle_event(run, set["INGAME"])
                 ingamebuttons[j].check_hover(pg.mouse.get_pos())
